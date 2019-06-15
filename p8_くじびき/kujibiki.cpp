@@ -10,10 +10,11 @@ using namespace std;
 vector<string> get_file_path(string input_dir) {
     glob_t globbuf;
     vector<string> files;
-    int ret = glob((input_dir + "*.txt").c_str(), 0, NULL, &globbuf);
+    glob((input_dir + "*.txt").c_str(), 0, NULL, &globbuf);
     for (int i = 0; i < globbuf.gl_pathc; i++) {
         files.push_back(globbuf.gl_pathv[i]);
     }
+    globfree(&globbuf);
     return files;
 }
 
@@ -64,8 +65,7 @@ int main(int argc, char* argv[]) {
     vector<string> files = get_file_path(input_dir);
     string f, ans;
     clock_t start, end;
-    for (int i = 0; i < files.size(); i++) {
-        f = files[i];
+    for (const auto& f: files) {
         start = clock();
         ans = solve(f);
         end = clock();
