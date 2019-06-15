@@ -23,8 +23,9 @@ string solve(string f) {
     ifstream ifs(f);
     string l;
     vector<int> nums;
-    int first, last;
+    int first, last, count = 0;
     while (getline(ifs, l)) {
+        count = 0;
         first = 0;
         last = l.find_first_of(" ");
         while (first < l.size()) {
@@ -33,8 +34,10 @@ string solve(string f) {
             first = last + 1;
             last = l.find_first_of(" ", first);
             if (last == string::npos) {
-                last = l.size();
+                if (count == 0) break;
+                else last = l.size();
             }
+            count++;
         }
     }
     int n, m;
