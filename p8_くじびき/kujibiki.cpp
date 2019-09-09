@@ -18,7 +18,6 @@ vector<string> get_file_path(string input_dir) {
     return files;
 }
 
-
 string solve(string f) {
     ifstream ifs(f);
     string l;
